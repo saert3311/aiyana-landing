@@ -1,0 +1,24 @@
+{
+  "name": "espai-aiyana-landing",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node --test tests/verify.test.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.10.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

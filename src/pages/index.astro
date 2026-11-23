@@ -1,0 +1,410 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import EventShowcase from '../components/EventShowcase.astro';
+import BookingForm from '../components/BookingForm.astro';
+import BrandMark from '../components/BrandMark.astro';
+import {
+  VENUE,
+  VENUE_IMAGES,
+  EQUIPMENT_GROUPS,
+  ISABEL_OPTIONS,
+  FEATURED_REVIEW,
+  SECONDARY_REVIEWS,
+  FAQ_ITEMS,
+} from '../data/venue';
+---
+
+<Layout>
+  <Header />
+
+  <main id="contenido-principal">
+    <!-- Hero a sangre completa desde y = 0 -->
+    <section
+      id="inicio"
+      aria-labelledby="hero-heading"
+      class="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-emerald-deep"
+    >
+      <Image
+        src={VENUE_IMAGES.hero}
+        alt="Barra de azulejo verde esmeralda con luz cálida y lámparas de ratán en Espai Aiyana Alfafar"
+        widths={[768, 1200, 1440]}
+        sizes="100vw"
+        priority
+        class="absolute inset-0 h-full w-full object-cover object-[center_58%]"
+      />
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#0E2622]/50 via-[#0E2622]/14 to-transparent"
+      ></div>
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0"
+        style="background: linear-gradient(28deg, rgba(14, 38, 34, 0.90) 0%, rgba(14, 38, 34, 0.62) 38%, rgba(14, 38, 34, 0.16) 74%, rgba(14, 38, 34, 0.04) 100%);"
+      ></div>
+
+      <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-32 sm:px-6 sm:pb-16 lg:px-8 lg:pb-20">
+        <h1
+          id="hero-heading"
+          class="font-display text-[clamp(2.75rem,6vw,5.25rem)] font-bold leading-[0.96] tracking-[-0.03em] text-porcelain max-w-[14ch]"
+        >
+          Tu sala privada para celebrar en Alfafar
+        </h1>
+        <p class="type-body text-porcelain/90 max-w-[46ch] mt-5">
+          Espacio luminoso y totalmente equipado para cumpleaños, baby showers, talleres y encuentros privados, a tu ritmo y sin prisas.
+        </p>
+        <a
+          href="#reserva"
+          class="mt-7 inline-flex items-center gap-2.5 rounded-full bg-porcelain px-7 py-3.5 font-display text-[1.0625rem] font-semibold text-ink hover:bg-mist active:-translate-y-[1px] active:scale-[0.98] transition-[background-color,transform] duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-porcelain"
+        >
+          <span>Consultar disponibilidad</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 20"
+            class="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4.5 10h11m-4.5-4.5L15.5 10 11 14.5" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Selector interactivo de celebraciones -->
+    <EventShowcase />
+
+    <!-- Equipamiento real y fotografía asimétrica -->
+    <section
+      id="espacio"
+      aria-labelledby="espacio-heading"
+      class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-hairline"
+    >
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <h2 id="espacio-heading" class="type-h2 text-ink max-w-[18ch]">
+          Todo preparado para llegar y disfrutar
+        </h2>
+        <p class="type-body text-ink-muted max-w-[46ch]">
+          Cuidamos cada rincón para que no tengas que cargar con equipo ni improvisar detalles durante tu celebración.
+        </p>
+      </div>
+
+      <div class="reveal-on-scroll mt-10 grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6 lg:gap-8">
+        <div class="aspect-[5/4] overflow-hidden rounded-3xl bg-mist">
+          <Image
+            src={VENUE_IMAGES.spaceCocina}
+            alt="Cocina office de Espai Aiyana con encimera de madera, fregadero negro mate, cafetera y azulejo verde esmeralda"
+            widths={[640, 960, 1440]}
+            sizes="(min-width: 768px) 56vw, 100vw"
+            loading="lazy"
+            class="h-full w-full object-cover object-center"
+          />
+        </div>
+        <div class="aspect-[3/4] md:aspect-auto md:h-full overflow-hidden rounded-3xl bg-mist">
+          <Image
+            src={VENUE_IMAGES.spaceRincon}
+            alt="Pared de palillería de madera con iluminación cálida LED, mesa blanca y tulipanes rosas en Espai Aiyana"
+            widths={[640, 960]}
+            sizes="(min-width: 768px) 36vw, 100vw"
+            loading="lazy"
+            class="h-full w-full object-cover object-[center_58%]"
+          />
+        </div>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+        {
+          EQUIPMENT_GROUPS.map((group) => (
+            <div class="border-t border-hairline pt-6">
+              <h3 class="type-subhead text-ink">{group.title}</h3>
+              <ul class="mt-4 space-y-2.5">
+                {group.items.map((item) => (
+                  <li class="type-body text-ink-muted max-w-[65ch]">{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Franja cromática verde esmeralda: organización flexible con Isabel -->
+    <section
+      id="organizacion"
+      aria-labelledby="organizacion-heading"
+      class="bg-emerald-brand text-porcelain py-20 sm:py-28 px-4 sm:px-6 lg:px-8"
+    >
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-10 lg:gap-14 items-center">
+        <div>
+          <h2 id="organizacion-heading" class="type-h2 text-porcelain max-w-[18ch]">
+            Alquila solo la sala o organízalo todo con Isabel
+          </h2>
+          <p class="type-body text-porcelain/90 max-w-[65ch] mt-5">
+            Puedes traer tu propia comida y decoración o apoyarte en Isabel para coordinarlo con colaboradores de confianza sin complicaciones.
+          </p>
+
+          <div class="mt-8 space-y-5">
+            {
+              ISABEL_OPTIONS.map((option) => (
+                <div class="border-t border-porcelain/20 pt-5">
+                  <h3 class="type-subhead text-porcelain">{option.title}</h3>
+                  <p class="type-body text-porcelain/85 max-w-[65ch] mt-1.5">
+                    {option.description}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+
+          <a
+            href={VENUE.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-9 inline-flex items-center gap-2.5 rounded-full bg-porcelain px-7 py-3.5 font-display text-[1.0625rem] font-semibold text-ink whitespace-nowrap hover:bg-mist active:-translate-y-[1px] active:scale-[0.98] transition-[background-color,transform] duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-porcelain"
+          >
+            <span>Hablar por WhatsApp</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 20 20"
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5.5 14.5l9-9M7.5 5.5h7v7" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="reveal-on-scroll aspect-[10/9] w-full overflow-hidden rounded-3xl bg-emerald-deep">
+          <Image
+            src={VENUE_IMAGES.isabelBuffet}
+            alt="Mesa buffet de quesos artesanales, embutidos y aceitunas junto al mural de hojas naturales en Espai Aiyana"
+            widths={[640, 960, 1440]}
+            sizes="(min-width: 768px) 54vw, 100vw"
+            loading="lazy"
+            class="h-full w-full object-cover object-right"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Reseñas verificadas de Google Maps -->
+    <section
+      id="resenas"
+      aria-labelledby="resenas-heading"
+      class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+    >
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <h2 id="resenas-heading" class="type-h2 text-ink max-w-[20ch]">
+          Lo que cuentan quienes ya han celebrado aquí
+        </h2>
+        <div class="flex items-center gap-3 type-body text-ink-muted tabular-nums">
+          <span class="inline-flex items-center gap-1 text-emerald-brand" aria-hidden="true">
+            {
+              Array.from({ length: 5 }).map(() => (
+                <svg viewBox="0 0 20 20" class="h-4 w-4 fill-current">
+                  <path d="M10 1.8l2.45 5.08 5.6.78-4.07 3.92.98 5.57L10 14.48l-4.96 2.67.98-5.57-4.07-3.92 5.6-.78L10 1.8z" />
+                </svg>
+              ))
+            }
+          </span>
+          <span>
+            <strong class="font-semibold text-ink">{VENUE.rating}</strong> de 5 en Google Maps según {VENUE.reviewCount} reseñas verificadas
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-start">
+        <figure class="rounded-3xl bg-mist p-8 sm:p-10">
+          <blockquote class="type-body text-ink max-w-[65ch]">
+            "{FEATURED_REVIEW.quote}"
+          </blockquote>
+          <figcaption class="mt-6 border-t border-hairline pt-4">
+            <span class="type-subhead text-ink block">{FEATURED_REVIEW.author}</span>
+            <span class="type-sm text-ink-muted">{FEATURED_REVIEW.occasion}</span>
+          </figcaption>
+        </figure>
+
+        <div>
+          {
+            SECONDARY_REVIEWS.map((review, index) => (
+              <figure
+                class:list={[
+                  'border-t border-hairline py-6',
+                  index === SECONDARY_REVIEWS.length - 1 && 'border-b',
+                ]}
+              >
+                <blockquote class="type-body text-ink max-w-[65ch]">
+                  "{review.quote}"
+                </blockquote>
+                <figcaption class="mt-3 flex flex-wrap items-baseline gap-x-3 type-sm">
+                  <span class="font-display font-semibold text-ink">{review.author}</span>
+                  <span class="text-ink-muted">{review.occasion}</span>
+                </figcaption>
+              </figure>
+            ))
+          }
+
+          <a
+            href={VENUE.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-7 inline-flex items-center gap-2 font-display text-[1.0625rem] font-semibold text-emerald-brand hover:text-emerald-deep underline underline-offset-4 decoration-hairline hover:decoration-emerald-brand transition-colors duration-200 tabular-nums"
+          >
+            <span>Leer las {VENUE.reviewCount} reseñas en Google Maps</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 20 20"
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5.5 14.5l9-9M7.5 5.5h7v7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes con acordeón nativo <details> -->
+    <section
+      id="preguntas"
+      aria-labelledby="preguntas-heading"
+      class="faq-accordion py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-hairline"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-start">
+        <div>
+          <h2 id="preguntas-heading" class="type-h2 text-ink max-w-[14ch]">
+            Preguntas frecuentes
+          </h2>
+          <p class="type-body text-ink-muted max-w-[40ch] mt-4">
+            Resolvemos las dudas más habituales antes de reservar tu fecha en Alfafar.
+          </p>
+        </div>
+
+        <div>
+          {
+            FAQ_ITEMS.map((item) => (
+              <details>
+                <summary>{item.question}</summary>
+                <p class="type-body text-ink-muted pb-6 pl-7 max-w-[65ch]">
+                  {item.answer}
+                </p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Reserva por WhatsApp y ubicación en Alfafar -->
+    <section
+      id="reserva"
+      aria-labelledby="reserva-heading"
+      class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-hairline"
+    >
+      <h2 id="reserva-heading" class="type-h2 text-ink max-w-[20ch]">
+        Consulta disponibilidad para tu fecha
+      </h2>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-[5fr_7fr] gap-10 lg:gap-12 items-start">
+        <div class="space-y-6">
+          <div class="border-t border-hairline pt-5">
+            <h3 class="type-subhead text-ink">Dirección en Alfafar</h3>
+            <p class="type-body text-ink-muted mt-1">{VENUE.address}</p>
+            <p class="type-sm text-ink-muted mt-2">{VENUE.accessibility}</p>
+          </div>
+
+          <div class="border-t border-hairline pt-5">
+            <h3 class="type-subhead text-ink">Teléfono y WhatsApp</h3>
+            <p class="mt-1">
+              <a
+                href={VENUE.telHref}
+                class="type-body font-medium text-emerald-brand hover:text-emerald-deep underline underline-offset-4 decoration-hairline hover:decoration-emerald-brand tabular-nums"
+              >
+                {VENUE.phoneDisplay}
+              </a>
+            </p>
+            <p class="type-sm text-ink-muted mt-1.5">
+              Horarios y presupuestos a medida según tu tipo de evento.
+            </p>
+          </div>
+
+          <div class="border-t border-hairline pt-5 flex flex-wrap gap-x-6 gap-y-2">
+            <a
+              href={VENUE.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="type-sm font-medium text-ink underline underline-offset-4 decoration-hairline hover:decoration-emerald-brand hover:text-emerald-brand transition-colors duration-150"
+            >
+              Cómo llegar en Google Maps
+            </a>
+            <a
+              href={VENUE.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="type-sm font-medium text-ink underline underline-offset-4 decoration-hairline hover:decoration-emerald-brand hover:text-emerald-brand transition-colors duration-150"
+            >
+              Ver más eventos en {VENUE.instagramHandle}
+            </a>
+          </div>
+
+          <div class="isolate overflow-hidden rounded-3xl border border-hairline bg-mist">
+            <iframe
+              src={VENUE.mapsEmbedUrl}
+              title="Mapa de ubicación de Espai Aiyana en Carrer Julio Colomer 18, Alfafar"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="h-64 w-full border-0"
+            ></iframe>
+          </div>
+        </div>
+
+        <BookingForm />
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-hairline py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-col gap-2">
+        <BrandMark class="text-ink" />
+        <p class="type-sm text-ink-muted">{VENUE.shortAddress}</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 type-sm text-ink-muted tabular-nums">
+        <a href={VENUE.telHref} class="hover:text-ink transition-colors duration-150">
+          {VENUE.phoneDisplay}
+        </a>
+        <a
+          href={VENUE.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-ink transition-colors duration-150"
+        >
+          Instagram {VENUE.instagramHandle}
+        </a>
+        <a
+          href={VENUE.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-ink transition-colors duration-150"
+        >
+          Google Maps
+        </a>
+      </div>
+    </div>
+  </footer>
+</Layout>

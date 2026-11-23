@@ -1,0 +1,443 @@
+---
+import { EVENT_SELECT_OPTIONS, VENUE } from '../data/venue';
+---
+
+<div class="rounded-3xl bg-mist p-6 sm:p-8 border border-hairline">
+  <form id="booking-form" class="space-y-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="booking-nombre" class="block type-sm font-medium text-ink">
+          Nombre completo
+        </label>
+        <span id="nombre-hint" class="block type-sm text-ink-muted mb-1.5">
+          Tu nombre para responderte
+        </span>
+        <input
+          id="booking-nombre"
+          name="nombre"
+          type="text"
+          required
+          minlength="2"
+          autocomplete="name"
+          aria-describedby="nombre-hint"
+          data-error="nombre-error"
+          class="field-control"
+        />
+        <div id="nombre-error" class="error-msg">
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 6.5v4.2m0 2.8h.01" stroke-linecap="round" />
+          </svg>
+          <span><span class="visually-hidden">Error: </span>Escribe tu nombre con al menos 2 caracteres.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="booking-contacto" class="block type-sm font-medium text-ink">
+          Teléfono o correo
+        </label>
+        <span id="contacto-hint" class="block type-sm text-ink-muted mb-1.5">
+          600 123 456 o tu correo
+        </span>
+        <input
+          id="booking-contacto"
+          name="contacto"
+          type="text"
+          required
+          minlength="6"
+          autocomplete="tel"
+          aria-describedby="contacto-hint"
+          data-error="contacto-error"
+          class="field-control"
+        />
+        <div id="contacto-error" class="error-msg">
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 6.5v4.2m0 2.8h.01" stroke-linecap="round" />
+          </svg>
+          <span><span class="visually-hidden">Error: </span>Indica un teléfono o correo válido para responderte.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="booking-tipo" class="block type-sm font-medium text-ink">
+          Tipo de evento
+        </label>
+        <span id="tipo-hint" class="block type-sm text-ink-muted mb-1.5">
+          Elige el formato que más encaja
+        </span>
+        <select
+          id="booking-tipo"
+          name="tipoEvento"
+          required
+          aria-describedby="tipo-hint"
+          data-error="tipo-error"
+          class="field-control"
+        >
+          <option value="">Selecciona una opción</option>
+          {EVENT_SELECT_OPTIONS.map((option) => <option value={option}>{option}</option>)}
+        </select>
+        <div id="tipo-error" class="error-msg">
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 6.5v4.2m0 2.8h.01" stroke-linecap="round" />
+          </svg>
+          <span><span class="visually-hidden">Error: </span>Selecciona el tipo de celebración o actividad.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="booking-fecha" class="block type-sm font-medium text-ink">
+          Fecha aproximada
+        </label>
+        <span id="fecha-hint" class="block type-sm text-ink-muted mb-1.5">
+          Día orientativo para revisar agenda
+        </span>
+        <input
+          id="booking-fecha"
+          name="fecha"
+          type="date"
+          required
+          aria-describedby="fecha-hint"
+          data-error="fecha-error"
+          class="field-control tabular-nums"
+        />
+        <div id="fecha-error" class="error-msg">
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 6.5v4.2m0 2.8h.01" stroke-linecap="round" />
+          </svg>
+          <span><span class="visually-hidden">Error: </span>Elige una fecha aproximada a partir de hoy.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="booking-invitados" class="block type-sm font-medium text-ink">
+          Invitados aproximados (opcional)
+        </label>
+        <span id="invitados-hint" class="block type-sm text-ink-muted mb-1.5">
+          Cifra orientativa entre 5 y 150
+        </span>
+        <input
+          id="booking-invitados"
+          name="invitados"
+          type="number"
+          min="5"
+          max="150"
+          inputmode="numeric"
+          aria-describedby="invitados-hint"
+          data-error="invitados-error"
+          class="field-control tabular-nums"
+        />
+        <div id="invitados-error" class="error-msg">
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="10" cy="10" r="7.5" />
+            <path d="M10 6.5v4.2m0 2.8h.01" stroke-linecap="round" />
+          </svg>
+          <span><span class="visually-hidden">Error: </span>Introduce una cifra orientativa entre 5 y 150 personas.</span>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend class="block type-sm font-medium text-ink">
+          Servicio deseado
+        </legend>
+        <span class="block type-sm text-ink-muted mb-1.5">
+          Indica si quieres ayuda extra
+        </span>
+        <div class="grid grid-cols-2 gap-1 rounded-xl border border-hairline bg-porcelain p-1">
+          <label class="relative flex cursor-pointer items-center justify-center rounded-lg px-2.5 py-2.5 text-center type-sm font-medium whitespace-nowrap text-ink-muted has-[:checked]:bg-emerald-brand has-[:checked]:text-porcelain transition-[background-color,color] duration-150">
+            <input
+              type="radio"
+              name="modalidad"
+              value="solo-sala"
+              checked
+              class="sr-only"
+            />
+            <span>Solo sala</span>
+          </label>
+          <label class="relative flex cursor-pointer items-center justify-center rounded-lg px-2.5 py-2.5 text-center type-sm font-medium whitespace-nowrap text-ink-muted has-[:checked]:bg-emerald-brand has-[:checked]:text-porcelain transition-[background-color,color] duration-150">
+            <input
+              type="radio"
+              name="modalidad"
+              value="con-organizacion"
+              class="sr-only"
+            />
+            <span>Sala y extras</span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div>
+      <label for="booking-notas" class="block type-sm font-medium text-ink">
+        Cuéntanos tu idea (opcional)
+      </label>
+      <span id="notas-hint" class="block type-sm text-ink-muted mb-1.5">
+        Franja horaria aproximada, temática, tarta o montaje que imaginas
+      </span>
+      <textarea
+        id="booking-notas"
+        name="notas"
+        rows="3"
+        aria-describedby="notas-hint"
+        class="field-control"
+      ></textarea>
+    </div>
+
+    <div class="pt-1 flex flex-col sm:flex-row sm:items-center gap-4">
+      <button
+        type="submit"
+        class="inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-emerald-brand px-7 py-3.5 font-display text-[1.0625rem] font-semibold text-porcelain whitespace-nowrap hover:bg-emerald-deep active:-translate-y-[1px] active:scale-[0.98] transition-[background-color,transform] duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-brand"
+      >
+        Consultar por WhatsApp
+      </button>
+      <p class="type-sm text-ink-muted tabular-nums">
+        O llama al <a href={VENUE.telHref} class="font-medium text-ink underline underline-offset-4 decoration-hairline hover:decoration-emerald-brand whitespace-nowrap">{VENUE.phoneDisplay}</a>
+      </p>
+    </div>
+  </form>
+
+  <div
+    id="booking-confirmation"
+    hidden
+    tabindex="-1"
+    class="mt-6 rounded-2xl border border-emerald-brand/30 bg-porcelain p-6 focus-visible:outline-2 focus-visible:outline-emerald-brand"
+  >
+    <p class="type-subhead text-emerald-brand">
+      Mensaje preparado para Isabel
+    </p>
+    <p class="type-sm text-ink-muted mt-1">
+      Revisa los datos y ábrelo directamente en WhatsApp para comprobar disponibilidad al momento.
+    </p>
+    <pre
+      id="booking-preview"
+      class="mt-4 whitespace-pre-wrap rounded-xl bg-mist p-4 type-sm text-ink border border-hairline font-sans"
+    ></pre>
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      <a
+        id="booking-whatsapp-link"
+        href={VENUE.whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-brand px-6 py-3 font-display text-[1.0625rem] font-semibold text-porcelain hover:bg-emerald-deep active:-translate-y-[1px] active:scale-[0.98] transition-[background-color,transform] duration-200"
+      >
+        Abrir WhatsApp ahora
+      </a>
+      <button
+        id="booking-edit-btn"
+        type="button"
+        class="type-sm font-medium text-ink-muted underline underline-offset-4 hover:text-ink cursor-pointer"
+      >
+        Editar consulta
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { buildWhatsAppInquiryUrl, formatInquirySummary } from '../lib/whatsapp';
+
+  const form = document.getElementById('booking-form') as HTMLFormElement | null;
+  const dateInput = document.getElementById('booking-fecha') as HTMLInputElement | null;
+  const typeSelect = document.getElementById('booking-tipo') as HTMLSelectElement | null;
+  const confirmationBox = document.getElementById('booking-confirmation');
+  const previewEl = document.getElementById('booking-preview');
+  const whatsappLink = document.getElementById('booking-whatsapp-link') as HTMLAnchorElement | null;
+  const editBtn = document.getElementById('booking-edit-btn');
+
+  if (dateInput) {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
+
+  document.addEventListener('aiyana:select-event', (event) => {
+    if (!(event instanceof CustomEvent) || !typeSelect) return;
+    const match = Array.from(typeSelect.options).find((opt) => opt.value === event.detail);
+    if (match) {
+      typeSelect.value = match.value;
+      typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
+
+  if (form) {
+    const supportsUserInvalid = CSS.supports('selector(:user-invalid)');
+    const dirtyState = new WeakMap<Element, { hasInteracted: boolean; hasBlurred: boolean }>();
+    const flagged = new WeakSet<Element>();
+    const announced = new WeakSet<Element>();
+
+    const announcer = document.createElement('div');
+    announcer.setAttribute('aria-live', 'polite');
+    announcer.classList.add('visually-hidden');
+    document.body.append(announcer);
+
+    let announceTimer: ReturnType<typeof setTimeout> | undefined;
+    let announcedField: Element | undefined;
+
+    const linkError = (el: HTMLElement, shown: boolean) => {
+      const errorId = el.dataset.error;
+      if (!errorId) return;
+      const ids = (el.getAttribute('aria-describedby') || '')
+        .split(/\s+/)
+        .filter((id) => id && id !== errorId);
+      if (shown) ids.push(errorId);
+      if (ids.length) el.setAttribute('aria-describedby', ids.join(' '));
+      else el.removeAttribute('aria-describedby');
+    };
+
+    const spokenText = (node: Element) => {
+      const copy = node.cloneNode(true) as Element;
+      copy.querySelectorAll('[aria-hidden="true"]').forEach((n) => n.remove());
+      return (copy.textContent || '').replace(/\s+/g, ' ').trim();
+    };
+
+    const announceError = (el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => {
+      const errorId = el.dataset.error;
+      if (!errorId) return;
+      const errorEl = document.getElementById(errorId);
+      if (!errorEl) return;
+      const label = el.labels?.[0] ? `${spokenText(el.labels[0])}: ` : '';
+      clearTimeout(announceTimer);
+      announcer.textContent = '';
+      announcedField = el;
+      announceTimer = setTimeout(() => {
+        announcer.textContent = label + spokenText(errorEl);
+      }, 500);
+    };
+
+    const syncAria = (el: EventTarget | null, announce = false) => {
+      if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement)) {
+        return;
+      }
+      if (!el.matches('.field-control')) return;
+
+      const isInvalid = supportsUserInvalid
+        ? el.matches(':user-invalid')
+        : !el.validity.valid && Boolean(dirtyState.get(el)?.hasBlurred);
+
+      if (!supportsUserInvalid && dirtyState.get(el)?.hasBlurred) {
+        el.classList.toggle('user-invalid-fallback', !el.validity.valid);
+        el.classList.toggle('user-valid-fallback', el.validity.valid);
+      }
+
+      if (isInvalid) {
+        if (announce && !announced.has(el)) {
+          announceError(el);
+          announced.add(el);
+        }
+        el.setAttribute('aria-invalid', 'true');
+        linkError(el, true);
+        flagged.add(el);
+      } else if (flagged.has(el) || el.getAttribute('aria-invalid') !== 'true') {
+        el.setAttribute('aria-invalid', 'false');
+        linkError(el, false);
+        flagged.delete(el);
+        announced.delete(el);
+        if (announcedField === el) {
+          clearTimeout(announceTimer);
+          announcer.textContent = '';
+        }
+      }
+    };
+
+    form.querySelectorAll<HTMLElement>('.field-control').forEach((el) => syncAria(el));
+
+    form.addEventListener(
+      'blur',
+      (e) => {
+        const target = e.target;
+        if (target instanceof Element && !supportsUserInvalid) {
+          const state = dirtyState.get(target) || { hasInteracted: false, hasBlurred: false };
+          state.hasBlurred = true;
+          dirtyState.set(target, state);
+          if (state.hasInteracted) syncAria(target, true);
+          return;
+        }
+        syncAria(target, true);
+      },
+      true
+    );
+
+    form.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target instanceof Element && !supportsUserInvalid) {
+        const state = dirtyState.get(target) || { hasInteracted: false, hasBlurred: false };
+        state.hasInteracted = true;
+        dirtyState.set(target, state);
+      }
+      if (target instanceof Element && target.hasAttribute('aria-invalid')) {
+        syncAria(target);
+      }
+    });
+
+    form.addEventListener(
+      'change',
+      (e) => {
+        const target = e.target;
+        if (target instanceof Element && !supportsUserInvalid) {
+          const state = dirtyState.get(target) || { hasInteracted: false, hasBlurred: false };
+          state.hasInteracted = true;
+          dirtyState.set(target, state);
+        }
+        syncAria(target, true);
+      },
+      true
+    );
+
+    form.addEventListener(
+      'invalid',
+      (e) => {
+        const target = e.target;
+        if (target instanceof Element) {
+          if (!supportsUserInvalid) {
+            dirtyState.set(target, { hasInteracted: true, hasBlurred: true });
+          }
+          announced.add(target);
+          syncAria(target);
+        }
+      },
+      true
+    );
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const modalidadRaw = data.get('modalidad');
+      const payload = {
+        nombre: String(data.get('nombre') || ''),
+        contacto: String(data.get('contacto') || ''),
+        tipoEvento: String(data.get('tipoEvento') || ''),
+        fecha: String(data.get('fecha') || ''),
+        invitados: String(data.get('invitados') || ''),
+        modalidad: (modalidadRaw === 'con-organizacion' ? 'con-organizacion' : 'solo-sala') as
+          | 'solo-sala'
+          | 'con-organizacion',
+        notas: String(data.get('notas') || ''),
+      };
+
+      const summary = formatInquirySummary(payload);
+      const url = buildWhatsAppInquiryUrl(payload);
+
+      if (previewEl) previewEl.textContent = summary;
+      if (whatsappLink) whatsappLink.href = url;
+      if (confirmationBox) {
+        confirmationBox.hidden = false;
+        confirmationBox.focus();
+      }
+    });
+
+    editBtn?.addEventListener('click', () => {
+      if (confirmationBox) confirmationBox.hidden = true;
+      document.getElementById('booking-nombre')?.focus();
+    });
+  }
+</script>

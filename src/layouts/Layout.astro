@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import { VENUE } from '../data/venue';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Espai Aiyana Eventos Alfafar | Sala privada para celebraciones',
+  description = 'Sala privada y luminosa en Alfafar, Valencia para cumpleaños, baby showers, comuniones, talleres y catas. Cocina office, proyector, sonido y ayuda integral con Isabel.',
+} = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'EventVenue',
+  name: VENUE.fullName,
+  description,
+  telephone: VENUE.phoneE164,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Carrer Julio Colomer, 18, bajo izquierda',
+    addressLocality: 'Alfafar',
+    addressRegion: 'Valencia',
+    postalCode: '46910',
+    addressCountry: 'ES',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: VENUE.coordinates.lat,
+    longitude: VENUE.coordinates.lng,
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: VENUE.reviewCount,
+    bestRating: '5',
+    worstRating: '1',
+  },
+  sameAs: [VENUE.instagramUrl, VENUE.mapsUrl],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#154B43" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Outfit:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="bg-porcelain text-ink selection:bg-emerald-brand selection:text-porcelain">
+    <a
+      href="#contenido-principal"
+      class="visually-hidden focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-emerald-brand focus:px-4 focus:py-2 focus:text-porcelain"
+    >
+      Saltar al contenido principal
+    </a>
+    <slot />
+  </body>
+</html>

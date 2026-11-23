@@ -1,0 +1,21 @@
+# Dependencias y salida de Astro
+node_modules/
+dist/
+.astro/
+
+# Variables de entorno locales
+.env
+.env.*
+!.env.example
+
+# Logs y caché de paquetes
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
